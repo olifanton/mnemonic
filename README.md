@@ -5,11 +5,11 @@ PHP port of [`tonweb-mnemonic`](https://github.com/toncenter/tonweb-mnemonic) JS
 
 `⚠️ This project is under active development!`
 
-<!--## Install
+## Install
 
 ```bash
 composer require olifanton/mnemonic
-```-->
+```
 
 ## Tests
 
