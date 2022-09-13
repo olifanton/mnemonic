@@ -72,7 +72,7 @@ jobs:
 
       - name: Run tests with Phpunit
         run: |
-          XDEBUG_MODE=coverage vendor/bin/phpunit --exclude non-ci
+          XDEBUG_MODE=coverage vendor/bin/phpunit
 
       - name: Generate test coverage badge
         if: github.ref == 'refs/heads/main'

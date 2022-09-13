@@ -36,7 +36,6 @@ class TonMnemonicTest extends TestCase
 
     /**
      * @throws TonMnemonicException
-     * @group non-ci
      */
     public function testGenerate(): void
     {
@@ -49,7 +48,6 @@ class TonMnemonicTest extends TestCase
 
     /**
      * @throws TonMnemonicException
-     * @group non-ci
      */
     public function testGenerateWithPassword(): void
     {

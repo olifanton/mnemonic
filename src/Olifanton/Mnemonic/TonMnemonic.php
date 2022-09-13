@@ -23,21 +23,19 @@ class TonMnemonic
      */
     public static function generate(?string $password = null, int $wordsCount = self::WORDS_COUNT): array
     {
-        $c = 0;
+        $maxRandomValue = count(Bip39English::WORDS) - 1;
+        $isPassword = $password && $password !== '';
 
         while (true) {
-            $c++;
             $mnemonicArray = [];
-            $rnd = self::getRandomValues($wordsCount);
+            $rnd = self::getRandomValues($wordsCount, 0, $maxRandomValue);
 
             for ($i = 0; $i < $wordsCount; $i++) {
-                $mnemonicArray[] = Bip39English::WORDS[$rnd[$i] & 2047];
+                $mnemonicArray[] = Bip39English::WORDS[$rnd[$i]];
             }
 
-            if ($password && strlen($password) > 0) {
-                if (!self::isPasswordNeeded($mnemonicArray)) {
-                    continue;
-                }
+            if ($isPassword && !self::isPasswordNeeded($mnemonicArray)) {
+                continue;
             }
 
             if (!self::isBasicSeed(self::mnemonicToEntropy($mnemonicArray, $password))) {
@@ -63,10 +61,8 @@ class TonMnemonic
             }
         }
 
-        if ($password && strlen($password) > 0) {
-            if (!self::isPasswordNeeded($mnemonicArray)) {
-                return false;
-            }
+        if ($password && $password !== '' && !self::isPasswordNeeded($mnemonicArray)) {
+            return false;
         }
 
         return self::isBasicSeed(self::mnemonicToEntropy($mnemonicArray, $password));
@@ -115,7 +111,7 @@ class TonMnemonic
     {
         $seed = Pbkdf2::pbkdf2Sha512($entropy, 'TON fast seed version', 1);
 
-        return $seed[0] == 1;
+        return $seed[0] === 1;
     }
 
     /**
@@ -125,7 +121,7 @@ class TonMnemonic
     {
         $seed = Pbkdf2::pbkdf2Sha512($entropy, 'TON seed version', max(1, (int)floor(self::PBKDF_ITERATIONS / 256)));
 
-        return $seed[0] == 0;
+        return $seed[0] === 0;
     }
 
     /**
@@ -146,13 +142,17 @@ class TonMnemonic
      * @return int[]
      * @throws TonMnemonicException
      */
-    private static function getRandomValues(int $count): array
+    private static function getRandomValues(int $count, int $minValue, int $maxValue): array
     {
         $result = [];
 
         try {
             for ($i = 0; $i < $count; $i++) {
-                $result[] = random_int(0, PHP_INT_MAX - 1);
+                do {
+                    $value = random_int($minValue, $maxValue);
+                } while (in_array($value, $result, true));
+
+                $result[] = $value;
             }
 
             return $result;
