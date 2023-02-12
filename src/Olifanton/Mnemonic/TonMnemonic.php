@@ -2,15 +2,15 @@
 
 namespace Olifanton\Mnemonic;
 
-use ajf\TypedArrays\Uint8Array;
+use Olifanton\TypedArrays\Uint8Array;
 use Olifanton\Mnemonic\Crypto\Hmac;
 use Olifanton\Mnemonic\Crypto\Pbkdf2;
 use Olifanton\Mnemonic\Exceptions\TonMnemonicException;
 use Olifanton\Mnemonic\Wordlist\Bip39English;
-use Olifanton\Utils\Bytes;
-use Olifanton\Utils\Crypto;
-use Olifanton\Utils\Exceptions\CryptoException;
-use Olifanton\Utils\KeyPair;
+use Olifanton\Interop\Bytes;
+use Olifanton\Interop\Crypto;
+use Olifanton\Interop\Exceptions\CryptoException;
+use Olifanton\Interop\KeyPair;
 
 class TonMnemonic
 {

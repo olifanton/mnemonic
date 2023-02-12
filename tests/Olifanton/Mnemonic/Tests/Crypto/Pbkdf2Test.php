@@ -3,7 +3,7 @@
 namespace Olifanton\Mnemonic\Tests\Crypto;
 
 use Olifanton\Mnemonic\Crypto\Pbkdf2;
-use Olifanton\Utils\Bytes;
+use Olifanton\Interop\Bytes;
 use PHPUnit\Framework\TestCase;
 
 class Pbkdf2Test extends TestCase

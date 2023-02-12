@@ -2,9 +2,9 @@
 
 namespace Olifanton\Mnemonic\Crypto;
 
-use ajf\TypedArrays\Uint8Array;
+use Olifanton\TypedArrays\Uint8Array;
 use Olifanton\Mnemonic\Exceptions\TonMnemonicException;
-use Olifanton\Utils\Bytes;
+use Olifanton\Interop\Bytes;
 
 final class Hmac
 {

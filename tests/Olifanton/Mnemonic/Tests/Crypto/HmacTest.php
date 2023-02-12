@@ -3,7 +3,7 @@
 namespace Olifanton\Mnemonic\Tests\Crypto;
 
 use Olifanton\Mnemonic\Crypto\Hmac;
-use Olifanton\Utils\Bytes;
+use Olifanton\Interop\Bytes;
 use PHPUnit\Framework\TestCase;
 
 class HmacTest extends TestCase

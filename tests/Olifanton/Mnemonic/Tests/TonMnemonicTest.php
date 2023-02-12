@@ -5,7 +5,7 @@ namespace Olifanton\Mnemonic\Tests;
 use Olifanton\Mnemonic\Exceptions\TonMnemonicException;
 use Olifanton\Mnemonic\TonMnemonic;
 use Olifanton\Mnemonic\Wordlist\Bip39English;
-use Olifanton\Utils\Bytes;
+use Olifanton\Interop\Bytes;
 use PHPUnit\Framework\TestCase;
 
 class TonMnemonicTest extends TestCase
