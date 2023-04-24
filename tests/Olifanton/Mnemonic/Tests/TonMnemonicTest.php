@@ -72,7 +72,7 @@ class TonMnemonicTest extends TestCase
     /**
      * @throws TonMnemonicException
      */
-    public function testIsPasswordNeeded()
+    public function testIsPasswordNeeded(): void
     {
         $this->assertFalse(TonMnemonic::isPasswordNeeded(self::STUB_MNEMONIC));
         $this->assertTrue(TonMnemonic::isPasswordNeeded(self::STUB_PASSWORD_MNEMONIC));

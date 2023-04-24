@@ -125,6 +125,7 @@ class TonMnemonic
     }
 
     /**
+     * @param string[] $mnemonicArray
      * @throws TonMnemonicException
      */
     private static function mnemonicToEntropy(array $mnemonicArray, ?string $password = ''): Uint8Array
