@@ -61,7 +61,7 @@ class TonMnemonic
             }
         }
 
-        if ($password && $password !== '' && !self::isPasswordNeeded($mnemonicArray)) {
+        if ($password && $password !== "" && !self::isPasswordNeeded($mnemonicArray)) {
             return false;
         }
 
@@ -74,7 +74,7 @@ class TonMnemonic
      */
     public static function isPasswordNeeded(array $mnemonicArray): bool
     {
-        $entropy = self::mnemonicToEntropy($mnemonicArray, '');
+        $entropy = self::mnemonicToEntropy($mnemonicArray, "");
 
         return self::isPasswordSeed($entropy) && !self::isBasicSeed($entropy);
     }
@@ -83,8 +83,12 @@ class TonMnemonic
      * @param string[] $mnemonicArray
      * @throws TonMnemonicException
      */
-    public static function mnemonicToSeed(array $mnemonicArray, ?string $password = ''): Uint8Array
+    public static function mnemonicToSeed(array $mnemonicArray, ?string $password = ""): Uint8Array
     {
+        if (!self::validate($mnemonicArray, empty($password) ? null : $password)) {
+            throw new TonMnemonicException("Invalid mnemonic phrase");
+        }
+
         $entropy = self::mnemonicToEntropy($mnemonicArray, $password);
         $seed = Pbkdf2::pbkdf2Sha512($entropy, 'TON default seed', self::PBKDF_ITERATIONS);
 
